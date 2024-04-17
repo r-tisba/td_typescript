@@ -1,0 +1,122 @@
+### REALISATEURS
+
+POST http://localhost:3000/api/realisateurs
+Content-Type: application/json
+
+{
+    "name": "James Cameron",
+    "birthDate": "1950-01-01",
+    "biography": "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA"
+}
+
+###
+
+GET http://localhost:3000/api/realisateurs
+
+###
+
+GET http://localhost:3000/api/realisateurs/<ID>
+
+###
+
+PUT http://localhost:3000/api/realisateurs/<ID>
+Content-Type: application/json
+
+{
+    "name": "James Cameron 2",
+    "birthDate": "1950-01-02",
+    "biography": "BBBBBBBBBBBBBBBBBBBBBBB"
+}
+
+###
+
+DELETE http://localhost:3000/api/realisateurs/<ID>
+
+
+### FILMS
+
+POST http://localhost:3000/api/films
+Content-Type: application/json
+
+{
+    "title": "AAAH!",
+    "releaseYear": 2008,
+    "genre": "Horreur",
+    "directors": {
+        "_id": "661fea8b712fef14f1d9bfbd",
+        "name": "James Cameron",
+        "birthDate": "2000-12-31T23:00:00.000Z",
+        "biography": "AAAAAAAAA"
+    }
+}
+
+###
+
+GET http://localhost:3000/api/films
+
+###
+
+GET http://localhost:3000/api/films/<ID>
+
+###
+
+PUT http://localhost:3000/api/films/<ID>
+Content-Type: application/json
+
+{
+    "_id": "661fecd95019179e9bc60e0e",
+    "title": "DDD!",
+    "releaseYear": 2008,
+    "genre": "Comédie",
+    "directors": [
+        "661fea8b712fef14f1d9bfbd"
+    ]
+}
+
+###
+
+DELETE http://localhost:3000/api/films/<ID>
+
+### SEANCES
+
+POST http://localhost:3000/api/seances
+Content-Type: application/json
+
+{
+    "film" : {
+        "_id": "661fec505019179e9bc60e0b",
+        "title": "AAAH!",
+        "releaseYear": 2008,
+        "genre": "Horreur",
+        "directors": [
+            "661fea8b712fef14f1d9bfbd"
+        ]
+    },
+    "date": "01/01/24",
+    "time": "20h30",
+    "availableSeats": 150
+}
+
+###
+
+GET http://localhost:3000/api/seances
+
+###
+
+GET http://localhost:3000/api/seances/<ID>
+
+###
+
+PUT http://localhost:3000/api/seances/<ID>
+Content-Type: application/json
+
+{
+    "film" : ["661fec505019179e9bc60e0b"],
+    "date": "02/01/24",
+    "time": "22h00",
+    "availableSeats": 180
+}
+
+###
+
+DELETE http://localhost:3000/api/seances/<ID>
