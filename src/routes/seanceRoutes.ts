@@ -1,27 +1,26 @@
 import { Router, Request, Response } from "express";
 import mongoose from 'mongoose';
-import { IFilm, schemaFilm } from "../models/Film";
+import { ISession, schemaSeance } from "../models/Seance";
 
-const Film = mongoose.model('Film', schemaFilm);
+const Seance = mongoose.model('Seance', schemaSeance);
 const router = Router();
 
 router.get("/", async (req: Request, res: Response) => {
   try {
-    const films = await Film.find();
-    res.status(200).json(films);
+    const sessions = await Seance.find();
+    res.status(200).json(sessions);
   } catch (error) {
     console.error(error);
-    res.status(500).send('Erreur lors du read all');
-  }
+    res.status(500).send('Erreur lors du read all');  }
 });
 
 router.get("/:id", async (req: Request, res: Response) => {
   try {
-    const film = await Film.findById(req.params.id);
-    if (!film) {
-      return res.status(404).send('Film non trouvé');
+    const session = await Seance.findById(req.params.id);
+    if (!session) {
+      return res.status(404).send('Séance non trouvée');
     }
-    res.status(200).json(film);
+    res.status(200).json(session);
   } catch (error) {
     console.error(error);
     res.status(500).send('Erreur lors du read');
@@ -29,11 +28,11 @@ router.get("/:id", async (req: Request, res: Response) => {
 });
 
 router.post("/", async (req: Request, res: Response) => {
-    const filmData: IFilm = req.body;
+    const sessionData: ISession = req.body;
     try {
-      const newFilm = new Film(filmData);
-      const savedFilm = await newFilm.save();
-      res.status(201).json(savedFilm);
+      const newSession = new Seance(sessionData);
+      const savedSession = await newSession.save();
+      res.status(201).json(savedSession);
     } catch (error) {
       console.error(error);
       res.status(500).send('Erreur lors du input');
@@ -42,11 +41,11 @@ router.post("/", async (req: Request, res: Response) => {
 
 router.put("/:id", async (req: Request, res: Response) => {
   try {
-    const updatedFilm = await Film.findByIdAndUpdate(req.params.id, req.body, { new: true });
-    if (!updatedFilm) {
-      return res.status(404).send('Film non trouvé');
+    const updatedSession = await Seance.findByIdAndUpdate(req.params.id, req.body, { new: true });
+    if (!updatedSession) {
+      return res.status(404).send('Séance non trouvée');
     }
-    res.status(200).json(updatedFilm);
+    res.status(200).json(updatedSession);
   } catch (error) {
     console.error(error);
     res.status(500).send('Erreur lors du update');
@@ -55,11 +54,11 @@ router.put("/:id", async (req: Request, res: Response) => {
 
 router.delete("/:id", async (req: Request, res: Response) => {
   try {
-    const deletedFilm = await Film.findByIdAndDelete(req.params.id);
-    if (!deletedFilm) {
-      return res.status(404).send('Film non trouvé');
+    const deletedSession = await Seance.findByIdAndDelete(req.params.id);
+    if (!deletedSession) {
+      return res.status(404).send('Séance non trouvée');
     }
-    res.status(200).json({ message: 'Film supprimé avec succès' });
+    res.status(200).json({ message: 'Séance supprimée avec succès' });
   } catch (error) {
     console.error(error);
     res.status(500).send('Erreur lors du delete');
